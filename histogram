@@ -1,0 +1,28 @@
+import cv2
+import numpy as np
+
+# Read the input image
+image = cv2.imread('Computer vision\parrot.jpg')
+hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+# Select the region for histogram calculation (ROI)
+roi = cv2.selectROI(image)
+
+# Calculate histogram of the selected region
+roi_hist = cv2.calcHist([hsv_image[int(roi[1]):int(roi[1] + roi[3]), int(roi[0]):int(roi[0] + roi[2])]], [0, 1], None, [180, 256], [0, 180, 0, 256])
+
+# Normalize the histogram
+roi_hist = cv2.normalize(roi_hist, roi_hist, 0, 255, cv2.NORM_MINMAX)
+
+# Backproject the image using the histogram model
+backprojected = cv2.calcBackProject([hsv_image], [0, 1], roi_hist, [0, 180, 0, 256], 1)
+
+# Thresholding (optional)
+_, thresholded = cv2.threshold(backprojected, 50, 255, cv2.THRESH_BINARY)
+
+# Display the results
+cv2.imshow('Original Image', image)
+cv2.imshow('Backprojection', backprojected)
+cv2.imshow('Thresholded Image', thresholded)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

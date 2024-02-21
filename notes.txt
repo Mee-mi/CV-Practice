@@ -1,0 +1,32 @@
+we used averaging technique to blur out the image.
+with kernal of 3x3 metrics containing all ones.
+the more you increase filter size the more average
+and the more image will  be blured.
+then perfom normalization else the image will be
+white.
+
+low pass blur image
+high pass sharp the image
+
+
+Motion bluring
+values gets blur in particular direction.
+A directional low pass filter, by averging the values
+in horizontal direction.
+horizonally dizzy
+
+box filter to increase the intensity of image, to
+make it brighter
+
+gaussian blur is far better,  
+contrast values good, color maintained
+
+median blur: replaces pixel value with the median
+of all values laying in kernel area(beautify).
+it is best for noise
+
+bilateral: reduction of noise + preserving the edges
+
+
+SHARPING IMAGE
+  
